@@ -1,0 +1,8 @@
+flask==2.0.1
+werkzeug==2.0.1
+flask-uploads
+opencv-python
+tensorflow
+numpy
+scikit-learn
+pillow

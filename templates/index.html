@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image Similarity Search</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+      }
+      .container {
+        margin-top: 50px;
+      }
+      .upload-form {
+        margin-bottom: 30px;
+      }
+      .image-list {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      .image-list img {
+        width: 150px;
+        height: 150px;
+        margin: 10px;
+        border-radius: 5px;
+        object-fit: cover;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Image Similarity Search</h1>
+      <form
+        class="upload-form"
+        action="/"
+        method="POST"
+        enctype="multipart/form-data"
+      >
+        <input type="file" name="image" accept="image/*" required />
+        <button type="submit">Search Image</button>
+      </form>
+
+      {% if query_image %}
+      <h2>Results for: {{ query_image }}</h2>
+      <div class="image-list">
+        {% for image, similarity in sorted_images %}
+        <div>
+          <img
+            src="{{ url_for('local_image', filename=image) }}"
+            alt="Similar Image"
+          />
+          <p>{{ image }} (Similarity: {{ similarity | round(2) }})</p>
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+  </body>
+</html>
